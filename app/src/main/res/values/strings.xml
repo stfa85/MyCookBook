@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MyCookBook</string>
+    <string name="accede">Accede</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="registrado">¿Estas registrado?</string>
+    <string name="registrate">Registrate</string>
+</resources>
