@@ -5,4 +5,8 @@
     <string name="email">Email</string>
     <string name="registrado">¿Estas registrado?</string>
     <string name="registrate">Registrate</string>
+    <string name="salir">Salir</string>
+    <string name="crear_receta">Crear Receta</string>
+    <string name="buscar">Buscar</string>
+    <string name="ver_mis_recetas">Ver Mis recetas</string>
 </resources>
