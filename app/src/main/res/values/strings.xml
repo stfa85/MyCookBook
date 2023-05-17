@@ -9,4 +9,7 @@
     <string name="crear_receta">Crear Receta</string>
     <string name="buscar">Buscar</string>
     <string name="ver_mis_recetas">Ver Mis recetas</string>
+    <string name="nombre_de_la_receta">Nombre de la receta</string>
+    <string name="nombre_de_categoria">Nombre de categoria</string>
+    <string name="todas_las_recetas">Todas las recetas</string>
 </resources>
