@@ -1,6 +1,5 @@
 package com.proyectofinal.mycookbook
 
-//import com.google.firebase.firestore.ktx.firestore
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button

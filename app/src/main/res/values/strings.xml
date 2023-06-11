@@ -12,4 +12,15 @@
     <string name="nombre_de_la_receta">Nombre de la receta</string>
     <string name="nombre_de_categoria">Nombre de categoria</string>
     <string name="todas_las_recetas">Todas las recetas</string>
+    <string name="nombre_subcategoria">Nombre subcategoria</string>
+    <string name="cargar_foto">Cargar Foto</string>
+    <string name="nombre_del_plato">Nombre del Plato</string>
+    <string name="ingredientes">Ingredientes</string>
+    <string name="personas">Personas</string>
+    <string name="tiempo_estimado">Tiempo estimado</string>
+    <string name="instrucciones">Instrucciones</string>
+    <string name="guardar">Guardar</string>
+    <string name="eliminar">Eliminar</string>
+    <string name="modificar">Modificar</string>
+    <string name="ver_todas_las_recetas">Ver todas las recetas</string>
 </resources>

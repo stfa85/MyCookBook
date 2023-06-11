@@ -7,48 +7,62 @@
 
     <ImageView
         android:id="@+id/ivFotoReceta"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:src="@drawable/foto"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="32dp"
-        android:scaleType="centerCrop"
+        android:layout_width="127dp"
+        android:layout_height="109dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:adjustViewBounds="true"
-        app:layout_constraintHorizontal_bias="0.5" />
+        android:scaleType="centerCrop"
+        android:src="@drawable/foto"
+        app:layout_constraintBottom_toTopOf="@+id/guideline5"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="370dp" />
 
     <Button
         android:id="@+id/btCargarFoto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:text="@string/cargar_foto"
-        app:layout_constraintTop_toBottomOf="@+id/ivFotoReceta"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
+        app:layout_constraintBottom_toTopOf="@+id/guideline5"
+        app:layout_constraintEnd_toStartOf="@+id/guideline6"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="120dp" />
 
     <EditText
         android:id="@+id/etNombrePlato"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/nombre_del_plato"
-        app:layout_constraintTop_toBottomOf="@+id/btCargarFoto"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
+        app:layout_constraintTop_toTopOf="@+id/guideline5" />
 
     <EditText
         android:id="@+id/etIngredientes"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:gravity="top"
         android:hint="@string/ingredientes"
         android:minLines="2"
-        android:gravity="top"
-        app:layout_constraintTop_toBottomOf="@+id/etNombrePlato"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
+        app:layout_constraintStart_toEndOf="@+id/etNombrePlato"
+        app:layout_constraintTop_toTopOf="@+id/guideline5" />
 
     <EditText
         android:id="@+id/etCantidadPersonas"
@@ -88,11 +102,19 @@
         android:id="@+id/btGuardar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:text="@string/guardar"
-        app:layout_constraintTop_toBottomOf="@+id/etInstrucciones"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/guideline5"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="24dp" />
+        app:layout_constraintStart_toStartOf="@+id/guideline6"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="542dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

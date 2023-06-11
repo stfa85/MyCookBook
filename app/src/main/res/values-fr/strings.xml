@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MyCookBook</string>
+    <string name="accede">Accès</string>
+    <string name="password">Mot de passe</string>
+    <string name="email">Email</string>
+    <string name="registrado">Êtes-vous inscrit?</string>
+    <string name="registrate">S\'inscrire</string>
+    <string name="salir">Quitter</string>
+    <string name="crear_receta">Créer une recette</string>
+    <string name="buscar">Rechercher</string>
+    <string name="ver_mis_recetas">Voir mes recettes</string>
+    <string name="nombre_de_la_receta">Nom de la recette</string>
+    <string name="nombre_de_categoria">Nom de catégorie</string>
+    <string name="todas_las_recetas">Toutes les recettes</string>
+    <string name="nombre_subcategoria">Nom de la sous-catégorie</string>
+    <string name="cargar_foto">Envoyer la photo</string>
+    <string name="nombre_del_plato">Nom du plat</string>
+    <string name="ingredientes">Ingrédients</string>
+    <string name="personas">Personnes</string>
+    <string name="tiempo_estimado">Temps estimé</string>
+    <string name="instrucciones">Instructions</string>
+    <string name="guardar">Enregistrer</string>
+    <string name="eliminar">Supprimer</string>
+    <string name="modificar">Modifier</string>
+</resources>

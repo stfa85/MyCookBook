@@ -11,29 +11,29 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import java.io.ByteArrayOutputStream
 import java.util.UUID
 
-class CrearRecetaActivity : AppCompatActivity() {
+
+class ModificarRecetaActivity : AppCompatActivity() {
+
     private lateinit var etNombrePlato: EditText
     private lateinit var etIngredientes: EditText
     private lateinit var etCantidadPersonas: EditText
     private lateinit var etTiempo: EditText
     private lateinit var etInstrucciones: EditText
-    private lateinit var btGuardar: Button
+    private lateinit var btModificar: Button
     private lateinit var btCargarFoto: Button
     private lateinit var ivFotoReceta: ImageView
-    private val firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
     private lateinit var storageRef: StorageReference
     private var fotoUrl: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_crear_receta)
+        setContentView(R.layout.activity_modificar_receta)
 
         etNombrePlato = findViewById(R.id.etNombrePlato)
         etIngredientes = findViewById(R.id.etIngredientes)
@@ -41,15 +41,14 @@ class CrearRecetaActivity : AppCompatActivity() {
         etTiempo = findViewById(R.id.etTiempo)
         etInstrucciones = findViewById(R.id.etInstrucciones)
 
-        btGuardar = findViewById(R.id.btGuardar)
+        btModificar = findViewById(R.id.btModificar)
         btCargarFoto = findViewById(R.id.btCargarFoto)
         ivFotoReceta = findViewById(R.id.ivFotoReceta)
 
-        btGuardar.setOnClickListener { guardarReceta() }
+        btModificar.setOnClickListener { modificarReceta() }
         btCargarFoto.setOnClickListener { seleccionarFuente() }
 
         storageRef = FirebaseStorage.getInstance().reference
-
         val nombrePlato = intent.getStringExtra("nombrePlato")
         val ingredientes = intent.getStringExtra("ingredientes")
         val cantidadPersonas = intent.getStringExtra("cantidadPersonas")
@@ -57,17 +56,43 @@ class CrearRecetaActivity : AppCompatActivity() {
         val instrucciones = intent.getStringExtra("instrucciones")
         val fotoUrl = intent.getStringExtra("foto")
 
-
         etNombrePlato.setText(nombrePlato)
         etIngredientes.setText(ingredientes)
         etCantidadPersonas.setText(cantidadPersonas)
         etTiempo.setText(tiempoEstimado)
         etInstrucciones.setText(instrucciones)
 
-
         if (fotoUrl != null) {
             Glide.with(this).load(fotoUrl).into(ivFotoReceta)
         }
+    }
+
+    private fun modificarReceta() {
+        val nombrePlato = etNombrePlato.text.toString()
+        val ingredientes = etIngredientes.text.toString()
+        val cantidadPersonas = etCantidadPersonas.text.toString()
+        val tiempoEstimado = etTiempo.text.toString()
+        val instrucciones = etInstrucciones.text.toString()
+
+        val receta = hashMapOf<String, Any>(
+            "nombrePlato" to nombrePlato,
+            "ingredientes" to ingredientes,
+            "cantidadPersonas" to cantidadPersonas,
+            "tiempo" to tiempoEstimado,
+            "instrucciones" to instrucciones
+        )
+
+        val firestore = FirebaseFirestore.getInstance()
+        val recetaRef = firestore.collection("Recetas").document("Document ID")
+
+        recetaRef.update(receta)
+            .addOnSuccessListener {
+                Toast.makeText(this, "Receta modificada.", Toast.LENGTH_SHORT).show()
+                finish()
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(this, "Error modificando la receta.", Toast.LENGTH_SHORT).show()
+            }
     }
 
     private fun seleccionarFuente() {
@@ -141,36 +166,4 @@ class CrearRecetaActivity : AppCompatActivity() {
             }
         }
     }
-
-    private fun guardarReceta() {
-        val nombrePlato = etNombrePlato.text.toString()
-        val ingredientes = etIngredientes.text.toString()
-        val cantidadPersonas = etCantidadPersonas.text.toString()
-        val tiempo = etTiempo.text.toString()
-        val instrucciones = etInstrucciones.text.toString()
-
-        val userId = FirebaseAuth.getInstance().currentUser?.uid
-
-        val receta = hashMapOf(
-            "nombrePlato" to nombrePlato,
-            "ingredientes" to ingredientes,
-            "cantidadPersonas" to cantidadPersonas,
-            "tiempo" to tiempo,
-            "instrucciones" to instrucciones,
-            "foto" to fotoUrl,
-            "userId" to userId
-        )
-
-        firestore.collection("Recetas")
-            .add(receta)
-            .addOnSuccessListener { documentReference ->
-                documentReference.id
-                Toast.makeText(this, "Receta guardada.", Toast.LENGTH_SHORT).show()
-                finish()
-            }
-            .addOnFailureListener { e ->
-                Toast.makeText(this, "Error guardando receta.", Toast.LENGTH_SHORT).show()
-            }
-    }
-
 }

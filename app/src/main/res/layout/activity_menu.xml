@@ -8,8 +8,9 @@
 
     <ImageView
         android:id="@+id/ivFotoUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/user"
         android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -17,42 +18,52 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <Button
-        android:id="@+id/btMisRecetas"
+        android:id="@+id/btCargarFoto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="62dp"
-        android:text="@string/ver_mis_recetas"
+        android:layout_marginTop="8dp"
+        android:text="@string/cargar_foto"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivFotoUser" />
 
     <Button
-        android:id="@+id/btBuscar"
-        android:layout_width="wrap_content"
+        android:id="@+id/btMisRecetas"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/buscar"
+        android:text="@string/ver_mis_recetas"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btMisRecetas" />
+        app:layout_constraintTop_toBottomOf="@+id/btCargarFoto" />
 
     <Button
         android:id="@+id/btCrear"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/crear_receta"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btBuscar" />
+        app:layout_constraintTop_toBottomOf="@+id/btTodasRecetas" />
 
     <Button
         android:id="@+id/btSalir"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="@string/salir"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btCrear" />
+
+    <Button
+        android:id="@+id/btTodasRecetas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/ver_todas_las_recetas"
+        app:layout_constraintTop_toBottomOf="@+id/btMisRecetas"
+        tools:layout_editor_absoluteX="153dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
