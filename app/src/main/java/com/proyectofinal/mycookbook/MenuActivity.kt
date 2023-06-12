@@ -18,7 +18,6 @@ import com.proyectofinal.mycookbook.databinding.ActivityMenuBinding
 import java.io.ByteArrayOutputStream
 import java.util.UUID
 
-
 class MenuActivity : AppCompatActivity() {
     private lateinit var ivFotoUser: ImageView
     private lateinit var btMisRecetas: Button
@@ -27,6 +26,8 @@ class MenuActivity : AppCompatActivity() {
     private lateinit var btSalir: Button
     private lateinit var btCargarFoto: Button
     private lateinit var binding: ActivityMenuBinding
+    private var fotoUrl: String? = null
+    private var userId: String? = null
 
     private val storage = Firebase.storage
     private val storageRef = storage.reference
@@ -49,8 +50,27 @@ class MenuActivity : AppCompatActivity() {
         btTodasRecetas.setOnClickListener{ abrirTodasRecetas() }
         btCrear.setOnClickListener { abrirCrearReceta() }
         btSalir.setOnClickListener {cerrarSesion()}
-    }
+        userId = intent.getStringExtra("userId")
 
+        recuperarImagen()
+    }
+    private fun recuperarImagen() {
+        val coleccionAvatar = FirebaseFirestore.getInstance().collection("Usuarios")
+        val query = coleccionAvatar.whereEqualTo("userId", userId)
+        query.addSnapshotListener { snapshot, exception ->
+            if (exception != null) {
+                Toast.makeText(this@MenuActivity, "Error al obtener el usuario", Toast.LENGTH_SHORT)
+                    .show()
+                return@addSnapshotListener
+            }
+            for (document in snapshot?.documents!!) {
+                fotoUrl = document.getString("Foto")
+                fotoUrl?.let {
+                    Glide.with(this@MenuActivity).load(it).into(ivFotoUser)
+                }
+            }
+        }
+    }
 
     private fun seleccionarFuente() {
         val opciones = arrayOf<CharSequence>("Cámara", "Galería")
@@ -142,28 +162,31 @@ class MenuActivity : AppCompatActivity() {
         }.addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val downloadUri = task.result
-                guardarUrlEnFirestore(downloadUri.toString())
+                fotoUrl = downloadUri.toString()
+                Glide.with(this).load(bitmap).into(ivFotoUser)
+                guardarUrlEnFirestore()
             } else {
-                Toast.makeText(this, "Error en la subioda de la imagen.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Error en la subida de la imagen.", Toast.LENGTH_SHORT).show()
             }
         }
     }
+    private fun guardarUrlEnFirestore() {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid
 
-    private fun guardarUrlEnFirestore(url: String) {
-        val user = FirebaseAuth.getInstance().currentUser
-        user?.let { currentUser ->
-            val userRef = FirebaseFirestore.getInstance().collection("Usuarios").document(currentUser.uid)
-            val data = hashMapOf<String, Any>("Foto" to url)
-            userRef.update(data)
-                .addOnSuccessListener {
-                    Toast.makeText(this, "Foto actualizada en la Base de datos.", Toast.LENGTH_SHORT).show()
+        val coleccionUsuarios = FirebaseFirestore.getInstance().collection("Usuarios")
+        val query = coleccionUsuarios.whereEqualTo("userId", userId)
+
+        query.get().addOnSuccessListener { documents ->
+            if (!documents.isEmpty) {
+                val document = documents.documents[0]
+                document.reference.update("Foto", fotoUrl).addOnSuccessListener {
+                    Toast.makeText(this, "Foto actualizada en Firestore.", Toast.LENGTH_SHORT).show()
+                }.addOnFailureListener { exception ->
+                    Toast.makeText(this, "Error al actualizar la foto en Firestore.", Toast.LENGTH_SHORT).show()
                 }
-                .addOnFailureListener { exception ->
-                    Toast.makeText(this, "Error al actualizar la foto en la Base de datos.", Toast.LENGTH_SHORT).show()
-                }
-        } ?: run {
-            Toast.makeText(this, "Usuario no autenticado.", Toast.LENGTH_SHORT).show()
+            }
+        }.addOnFailureListener { exception ->
+            Toast.makeText(this, "Error al obtener el usuario en Firestore.", Toast.LENGTH_SHORT).show()
         }
     }
-
 }

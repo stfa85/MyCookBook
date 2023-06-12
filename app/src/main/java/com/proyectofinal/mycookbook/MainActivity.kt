@@ -77,6 +77,7 @@ class MainActivity : AppCompatActivity() {
                     val map = HashMap<String, Any>()
                     map["email"] = email
                     map["password"] = password
+                    map["Foto"] = "https://firebasestorage.googleapis.com/v0/b/mycookbook-ab743.appspot.com/o/images%2F31ea7b66-2934-49b6-a26c-948ad84ef48f.jpg?alt=media&token=d4528053-9349-4787-b944-b34f69ce7b10"
                     if (id != null) {
                         mFirestore.collection("Usuarios").document(id)
                             .set(map)

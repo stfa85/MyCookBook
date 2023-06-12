@@ -7,6 +7,7 @@ import android.provider.MediaStore
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -19,7 +20,7 @@ import java.util.UUID
 
 class ModificarRecetaActivity : AppCompatActivity() {
 
-    private lateinit var etNombrePlato: EditText
+    private lateinit var etNombrePlato: TextView
     private lateinit var etIngredientes: EditText
     private lateinit var etCantidadPersonas: EditText
     private lateinit var etTiempo: EditText
@@ -53,7 +54,7 @@ class ModificarRecetaActivity : AppCompatActivity() {
         val cantidadPersonas = intent.getStringExtra("cantidadPersonas")
         val tiempoEstimado = intent.getStringExtra("tiempo")
         val instrucciones = intent.getStringExtra("instrucciones")
-        var fotoUrl = intent.getStringExtra("Foto")
+        var fotoUrl = intent.getStringExtra("foto")
 
         etNombrePlato.setText(nombrePlato)
         etIngredientes.setText(ingredientes)

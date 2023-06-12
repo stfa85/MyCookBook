@@ -29,26 +29,16 @@
         android:layout_marginTop="16dp" />
 
     <EditText
-        android:id="@+id/etNombrePlato"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/nombre_del_plato"
-        app:layout_constraintTop_toBottomOf="@+id/btCargarFoto"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
-
-    <EditText
         android:id="@+id/etIngredientes"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="top"
         android:hint="@string/ingredientes"
         android:minLines="2"
-        android:gravity="top"
-        app:layout_constraintTop_toBottomOf="@+id/etNombrePlato"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etNombrePlato" />
 
     <EditText
         android:id="@+id/etCantidadPersonas"
@@ -93,5 +83,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etInstrucciones" />
+
+    <TextView
+        android:id="@+id/etNombrePlato"
+        android:layout_width="407dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="16dp"
+        android:hint="@string/nombre_del_plato"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btCargarFoto" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

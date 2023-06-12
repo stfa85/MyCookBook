@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.google.firebase.firestore.FirebaseFirestore
 
-
 class MostrarRecetaActivity : AppCompatActivity() {
     private lateinit var ivFotoReceta: ImageView
     private lateinit var tvNombrePlato: TextView
@@ -26,7 +25,6 @@ class MostrarRecetaActivity : AppCompatActivity() {
     private lateinit var btMenu: Button
     private var wakeLock: PowerManager.WakeLock? = null
     private lateinit var fotoUrl: String
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,9 +56,7 @@ class MostrarRecetaActivity : AppCompatActivity() {
                     .load(fotoUrl)
                     .into(ivFotoReceta)
             }
-
             mostrarReceta(receta)
-
         }
 
         btEliminar.setOnClickListener {
@@ -76,6 +72,7 @@ class MostrarRecetaActivity : AppCompatActivity() {
             intent.putExtra("cantidadPersonas", tvCantidadPersonas.text.toString())
             intent.putExtra("tiempo", tvTiempo.text.toString())
             intent.putExtra("instrucciones", tvInstrucciones.text.toString())
+            intent.putExtra("foto", fotoUrl)
             startActivity(intent)
         }
 
