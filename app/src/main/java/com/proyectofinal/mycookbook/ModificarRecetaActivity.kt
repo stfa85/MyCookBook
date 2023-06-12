@@ -17,7 +17,6 @@ import com.google.firebase.storage.StorageReference
 import java.io.ByteArrayOutputStream
 import java.util.UUID
 
-
 class ModificarRecetaActivity : AppCompatActivity() {
 
     private lateinit var etNombrePlato: EditText
@@ -54,7 +53,7 @@ class ModificarRecetaActivity : AppCompatActivity() {
         val cantidadPersonas = intent.getStringExtra("cantidadPersonas")
         val tiempoEstimado = intent.getStringExtra("tiempo")
         val instrucciones = intent.getStringExtra("instrucciones")
-        val fotoUrl = intent.getStringExtra("foto")
+        var fotoUrl = intent.getStringExtra("Foto")
 
         etNombrePlato.setText(nombrePlato)
         etIngredientes.setText(ingredientes)
@@ -63,7 +62,9 @@ class ModificarRecetaActivity : AppCompatActivity() {
         etInstrucciones.setText(instrucciones)
 
         if (fotoUrl != null) {
-            Glide.with(this).load(fotoUrl).into(ivFotoReceta)
+            Glide.with(this)
+                .load(fotoUrl)
+                .into(ivFotoReceta)
         }
     }
 

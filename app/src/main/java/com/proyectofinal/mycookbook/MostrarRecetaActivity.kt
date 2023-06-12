@@ -25,6 +25,7 @@ class MostrarRecetaActivity : AppCompatActivity() {
     private lateinit var btModificar: Button
     private lateinit var btMenu: Button
     private var wakeLock: PowerManager.WakeLock? = null
+    private lateinit var fotoUrl: String
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,10 +51,16 @@ class MostrarRecetaActivity : AppCompatActivity() {
         val receta = intent.getSerializableExtra("Recetas") as HashMap<String, Any>?
 
         if (receta != null) {
+            val fotoUrl = receta["foto"] as? String
+            if (fotoUrl != null) {
+                this.fotoUrl = fotoUrl
+                Glide.with(this)
+                    .load(fotoUrl)
+                    .into(ivFotoReceta)
+            }
 
             mostrarReceta(receta)
-        } else {
-            Toast.makeText(this, "La receta no existe", Toast.LENGTH_SHORT).show()
+
         }
 
         btEliminar.setOnClickListener {
