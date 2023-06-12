@@ -84,15 +84,27 @@ class ModificarRecetaActivity : AppCompatActivity() {
         )
 
         val firestore = FirebaseFirestore.getInstance()
-        val recetaRef = firestore.collection("Recetas").document("Document ID")
+        val recetasCollectionRef = firestore.collection("Recetas")
 
-        recetaRef.update(receta)
-            .addOnSuccessListener {
-                Toast.makeText(this, "Receta modificada.", Toast.LENGTH_SHORT).show()
-                finish()
+        recetasCollectionRef
+            .whereEqualTo("nombrePlato", nombrePlato)
+            .get()
+            .addOnSuccessListener { querySnapshot ->
+                for (documentSnapshot in querySnapshot.documents) {
+                    val recetaId = documentSnapshot.id
+                    recetasCollectionRef.document(recetaId)
+                        .update(receta)
+                        .addOnSuccessListener {
+                            Toast.makeText(this, "Receta modificada.", Toast.LENGTH_SHORT).show()
+                            finish()
+                        }
+                        .addOnFailureListener { e ->
+                            Toast.makeText(this, "Error modificando la receta.", Toast.LENGTH_SHORT).show()
+                        }
+                }
             }
             .addOnFailureListener { e ->
-                Toast.makeText(this, "Error modificando la receta.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Error al obtener la receta.", Toast.LENGTH_SHORT).show()
             }
     }
 
